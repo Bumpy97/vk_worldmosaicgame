@@ -15,6 +15,7 @@
     <link rel="icon" href="./favicon-32.png" type="image/png" />
     <script type="module" crossorigin src="./assets/index-BXbg38Fe.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-BfAJS1-f.css">
+    <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
   </head>
   <body>
     <div id="app" aria-live="polite"></div>
@@ -30,5 +31,30 @@
       <div class="boot__title">Мозаика миров</div>
       <div class="boot__line"><i></i></div>
     </div>
+    <script>
+  vkBridge.send("VKWebAppInit", {}).then(
+
+  vkBridge.send('VKWebAppShowNativeAds', { ad_format: 'interstitial' })
+  .then((data) => {
+    if (data.result)
+      console.log('Реклама показана');
+    else
+      console.log('Ошибка при показе');
+  })
+  .catch((error) => { console.log(error); /* Ошибка */ }));
+
+  vkBridge.send('VKWebAppShowBannerAd', {
+  banner_location: 'bottom'
+  })
+  .then((data) => { 
+    if (data.result) {
+      // Баннерная реклама отобразилась
+    }
+  })
+  .catch((error) => {
+    // Ошибка
+    console.log(error);
+  });
+</script>
   </body>
 </html>
